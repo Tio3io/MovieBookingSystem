@@ -7,28 +7,6 @@ import java.util.Scanner;
 public class MovieSerializer {
 
 
-    public static ArrayList<Movie> deserializeMovies() {
-        ArrayList<Movie> movies = new ArrayList<>();
-
-        Movie movie = null;
-        try {
-            FileInputStream fileIn = new FileInputStream("movies.txt");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            movie = (Movie) in.readObject();
-            in.close();
-            fileIn.close();
-            movies.add(movie);
-
-        } catch (IOException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException c) {
-            System.out.println("Movie not found");
-        }
-
-        return movies;
-
-    }
-
     public static ArrayList<Movie> loadMovies(String path) {
 
         ArrayList<Movie> movies = new ArrayList<Movie>();
