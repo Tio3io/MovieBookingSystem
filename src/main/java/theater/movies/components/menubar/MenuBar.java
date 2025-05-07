@@ -42,6 +42,10 @@ public class MenuBar {
             movieMap.put(movie.getName(), movie);
         }
 
+        // Set the datePicker
+        DatePicker movieDate = new DatePicker();
+        movieDate.setPromptText("Select a date");
+
         // Set ip the time picker
         ComboBox<String> timeSelector = new ComboBox<>();
         timeSelector.setPromptText("Select a time");
@@ -81,9 +85,7 @@ public class MenuBar {
             }
         });
 
-        // Set the datePicker
-        DatePicker movieDate = new DatePicker();
-        movieDate.setPromptText("Select a date");
+
 
 
         // Add the movie selector, datePicker, and time selector to the menu bar

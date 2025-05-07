@@ -52,7 +52,7 @@ public class HelloApplication extends Application {
 
         // create the theater arrangement
 
-        Map<Integer, ToggleButton> seatsInRow = new HashMap<Integer, ToggleButton>();
+        Map<Integer, ToggleButton> seatsInRow = new HashMap<>();
         //
         Map<Integer, Map<Integer, ToggleButton>> rows = new HashMap<>();
 
@@ -85,27 +85,23 @@ public class HelloApplication extends Application {
         actionBar.getChildren().add(printButton);
         actionBar.setAlignment(Pos.CENTER);
         actionBar.setPadding(new Insets(50));
-        printButton.setOnAction(new EventHandler<ActionEvent>() {
 
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                try {
-                    AnchorPane ticketRoot = new AnchorPane();
-                    Stage newStage = new Stage();
-                    newStage.setTitle("Ticket for " + MenuBar.getMovie().getName());
-                    newStage.setScene(new Scene(ticketRoot, 300, 300));
-                    newStage.initModality(Modality.APPLICATION_MODAL);
-                    newStage.show();
-                } catch (NullPointerException n) {
-                    Alert selectMovie = new Alert(Alert.AlertType.NONE);
-                    selectMovie.setTitle("No movie selected!");
-                    selectMovie.setHeaderText("Please select a movie to print a ticket.");
-                    selectMovie.getButtonTypes().add(ButtonType.CLOSE);
-                    selectMovie.show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
+        printButton.setOnAction(actionEvent -> {
+            try {
+                AnchorPane ticketRoot = new AnchorPane();
+                Stage newStage = new Stage();
+                newStage.setTitle("Ticket for " + MenuBar.getMovie().getName());
+                newStage.setScene(new Scene(ticketRoot, 300, 300));
+                newStage.initModality(Modality.APPLICATION_MODAL);
+                newStage.show();
+            } catch (NullPointerException n) {
+                Alert selectMovie = new Alert(Alert.AlertType.NONE);
+                selectMovie.setTitle("No movie selected!");
+                selectMovie.setHeaderText("Please select a movie to print a ticket.");
+                selectMovie.getButtonTypes().add(ButtonType.CLOSE);
+                selectMovie.show();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
         });

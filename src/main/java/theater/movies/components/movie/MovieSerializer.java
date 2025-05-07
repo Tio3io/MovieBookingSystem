@@ -9,7 +9,7 @@ public class MovieSerializer {
 
     public static ArrayList<Movie> loadMovies(String path) {
 
-        ArrayList<Movie> movies = new ArrayList<Movie>();
+        ArrayList<Movie> movies = new ArrayList<>();
 
         try {
             File movieFile = new File(path);
