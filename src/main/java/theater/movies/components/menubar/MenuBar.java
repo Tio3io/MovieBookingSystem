@@ -15,9 +15,21 @@ import java.util.Map;
 
 public class MenuBar {
 
+    private static Movie currentMovie;
+
+    public static Movie getMovie() {
+        return currentMovie;
+    }
+
+    public static void setCurrentMovie(Movie movie) {
+        currentMovie = movie;
+    }
+
     public static HBox createMenuBar(ArrayList<Movie> movies) {
 
         HBox menuBar = new HBox();
+
+
         // set the movies and placeholder
         ComboBox<String> movieSelector = new ComboBox<>();
         movieSelector.setPromptText("Select a movie");
@@ -41,6 +53,7 @@ public class MenuBar {
             Movie selectedMovie = movieMap.get(selectedMovieTitle);
             // If a movie is selected
             if (selectedMovie != null) {
+                setCurrentMovie(selectedMovie);
                 timeSelector.getItems().clear();
 
                 // Set times starting from current time that a customer can choose from
@@ -72,21 +85,6 @@ public class MenuBar {
         DatePicker movieDate = new DatePicker();
         movieDate.setPromptText("Select a date");
 
-
-
-
-
-       /* if (movieDate.getValue() != null) {
-            int currentHours = 1;
-            int currentMinutes = 10;
-            for (int i = 0; i < 5; i++) {
-                HoursMinutes showTime = movie.generateAvailableTimes(currentHours,currentMinutes);
-                String formattedTime = String.format("%d:%d - %d:%d", showTime.getHMA().getHours(), showTime.getHMA().getMinutes(), showTime.getHMB().getHours(), showTime.getHMB().getMinutes());
-                timeSelector.getItems().add(formattedTime);
-                currentHours = showTime.getHMB().getHours();
-                currentMinutes = showTime.getHMB().getMinutes();
-            }
-        }*/
 
         // Add the movie selector, datePicker, and time selector to the menu bar
         menuBar.getChildren().addAll(movieSelector, movieDate, timeSelector);
