@@ -7,6 +7,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.layout.HBox;
 import theater.movies.components.movie.HoursMinutes;
 import theater.movies.components.movie.Movie;
+import theater.movies.components.seats.Seats;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -57,6 +58,10 @@ public class MenuBar {
             Movie selectedMovie = movieMap.get(selectedMovieTitle);
             // If a movie is selected
             if (selectedMovie != null) {
+                //if the current movie is not null then the seats are saved and refreshed
+                if (currentMovie != null) {
+                    Seats.changeMovies(currentMovie, selectedMovie);
+                }
                 setCurrentMovie(selectedMovie);
                 timeSelector.getItems().clear();
 

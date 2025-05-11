@@ -16,9 +16,13 @@ import javafx.stage.Stage;
 import theater.movies.components.menubar.MenuBar;
 import theater.movies.components.movie.Movie;
 import theater.movies.components.movie.MovieSerializer;
+import theater.movies.components.seats.Seats;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +36,7 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        String path = "src/main/java/theater/movies/components/movie/movies.txt"; // imput the path of the movies directory
+        String path = "src/main/java/theater/movies/components/movie/movies.txt"; // input the path of the movies directory
 
         ArrayList<Movie> movies = MovieSerializer.loadMovies(path);
 
@@ -41,12 +45,7 @@ public class HelloApplication extends Application {
         VBox seatRows = new VBox();
         BorderPane root = new BorderPane();
 
-        // establish the static number of rows and seats per theater
-        int numOfRows = 3;
-        int seatsPerRow = 8;
-
         // set up the menu bar behind scenes
-
         HBox menuBar = MenuBar.createMenuBar(movies);
         seatRows.setStyle("-fx-background-color: #727272;");
 
@@ -56,27 +55,6 @@ public class HelloApplication extends Application {
         //
         Map<Integer, Map<Integer, ToggleButton>> rows = new HashMap<>();
 
-        for (int i = 0; i < numOfRows; i++) {
-            HBox row = new HBox();
-            for (int j = 0; j < seatsPerRow; j++) {
-                ToggleButton seat = new ToggleButton();
-
-                seat.setPrefSize(25, 25);
-                row.getChildren().addAll(seat);
-
-                seatsInRow.put(j, seat);
-
-            }
-            // row housekeeping
-            row.setSpacing(30 + (i * 5));
-            row.setPadding(new Insets(20));
-            row.setAlignment(Pos.CENTER);
-
-            // vbox housekeeping
-            seatRows.getChildren().add(row);
-            seatRows.setAlignment(Pos.CENTER);
-            rows.put(i, seatsInRow);
-        }
 
 
         actionBar.setStyle("-fx-background-color: #363636;");
@@ -88,6 +66,7 @@ public class HelloApplication extends Application {
 
         printButton.setOnAction(actionEvent -> {
             try {
+                System.out.println();
                 AnchorPane ticketRoot = new AnchorPane();
                 Stage newStage = new Stage();
                 newStage.setTitle("Ticket for " + MenuBar.getMovie().getName());
@@ -103,12 +82,36 @@ public class HelloApplication extends Application {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        });
 
+        //basically just a place holder
+        //DO NOT MESS WITH OR TURN ON
+        //needs to be completely re-designed to work with the current seat system
+        Button saveButton = new Button("Place-Holder Save");
+        saveButton.setPadding(new Insets(20));
+        actionBar.getChildren().add(saveButton);
+        actionBar.setPadding(new Insets(50));
+
+        saveButton.setOnAction(save -> {
+
+            try {
+                FileOutputStream fileOut = new FileOutputStream("PlaceHolderName.ser");
+                ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                out.writeObject(seatRows);
+                out.close();
+                fileOut.close();
+
+                //DEBUG TEXT
+                System.out.println("Everything went through and is A OK");
+
+            } catch (IOException e) {
+                System.out.println("Error occurred during save process: " + e);
+            }
         });
 
         // Set up the sections of the BorderPane
         root.setTop(menuBar);
-        root.setCenter(seatRows);
+        root.setCenter(Seats.createSeats());
         root.setBottom(actionBar);
 
         // Set up the scene
@@ -119,6 +122,4 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
-
 }
