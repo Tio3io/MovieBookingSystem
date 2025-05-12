@@ -10,15 +10,16 @@ public class Movie implements Serializable {
     private static final long serialVersionUID = 1L;
     private String name;
     private int durationInMinutes;
-    private int [][] toggleButtonStateArray;
+    private int[][] toggleButtonStateArray;
 
     Movie (String name, int WatchHours, int WatchMinutes) {
         this.name = name;
         this.durationInMinutes = (WatchHours * 60) + WatchMinutes;
+
         this.toggleButtonStateArray = new int[Seats.getNumOfRows()][Seats.getSeatsPerRow()];
         for (int row = 0; row < Seats.getNumOfRows(); row++) {
-            for (int column = 0; column < Seats.getSeatsPerRow(); column++) {
-                this.toggleButtonStateArray[row][column] = 0;
+            for (int seat = 0; seat < Seats.getSeatsPerRow(); seat++) {
+                this.toggleButtonStateArray[row][seat] = 0;
             }
         }
     }
@@ -45,12 +46,12 @@ public class Movie implements Serializable {
 
     public void setToggleButtonStateArray(ToggleButton[][] seatArray) {
         for (int row = 0; row < Seats.getNumOfRows(); row++) {
-            for (int column = 0; column < Seats.getSeatsPerRow(); column++) {
-                if(seatArray[row][column].isSelected()) {
-                    this.toggleButtonStateArray[row][column] = 1;
+            for (int seat = 0; seat < Seats.getSeatsPerRow(); seat++) {
+                if(seatArray[row][seat].isSelected()) {
+                    this.toggleButtonStateArray[row][seat] = 1;
                 }
                 else {
-                    this.toggleButtonStateArray[row][column] = 0;
+                    this.toggleButtonStateArray[row][seat] = 0;
                 }
             }
         }

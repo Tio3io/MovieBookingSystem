@@ -7,10 +7,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import theater.movies.components.menubar.MenuBar;
@@ -49,11 +46,15 @@ public class HelloApplication extends Application {
         HBox menuBar = MenuBar.createMenuBar(movies);
         seatRows.setStyle("-fx-background-color: #727272;");
 
-        // create the theater arrangement
+        // Seats
+        VBox seats = Seats.createSeats();
 
-        Map<Integer, ToggleButton> seatsInRow = new HashMap<>();
-        //
-        Map<Integer, Map<Integer, ToggleButton>> rows = new HashMap<>();
+        for (int row = 0; row < seats.getChildren().size(); row++) {
+            HBox currentRow = (HBox) seats.getChildren().get(row);
+            for (int seat = 0; seat < currentRow.getChildren().size(); seat++) {
+                System.out.println(currentRow.getChildren().get(seat));
+            }
+        }
 
 
 
@@ -67,7 +68,7 @@ public class HelloApplication extends Application {
         printButton.setOnAction(actionEvent -> {
             try {
                 System.out.println();
-                AnchorPane ticketRoot = new AnchorPane();
+                GridPane ticketRoot = new GridPane();
                 Stage newStage = new Stage();
                 newStage.setTitle("Ticket for " + MenuBar.getMovie().getName());
                 newStage.setScene(new Scene(ticketRoot, 300, 300));
@@ -111,7 +112,7 @@ public class HelloApplication extends Application {
 
         // Set up the sections of the BorderPane
         root.setTop(menuBar);
-        root.setCenter(Seats.createSeats());
+        root.setCenter(seats);
         root.setBottom(actionBar);
 
         // Set up the scene

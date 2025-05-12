@@ -67,25 +67,13 @@ public class Seats {
                 ToggleButton seat = new ToggleButton();
                 seatArray[i][j] = seat;
 
-                //DEBUG TEXT
-                System.out.println(seat);
-                //
 
                 seat.setPrefSize(25, 25);
                 row.getChildren().addAll(seat);
 
                 seatsInRow.put(j, seat);
 
-                //toggle button control
-                seat.setOnAction(e -> {
-                    if (seat.isSelected()) {
-                        seat.setStyle("-fx-background-color: lightgreen; -fx-text-fill: black;");
-                        seat.setSelected(true);
-                    } else {
-                        seat.setStyle("-fx-background-color: lightgray; -fx-text-fill: black;");
-                        seat.setSelected(false);
-                    }
-                });
+                System.out.println(seatsInRow.get(3));
             }
 
             // row housekeeping
