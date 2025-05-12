@@ -38,7 +38,7 @@ public class Seats {
                     Seats.seatArray[row][column].setSelected(true);
                     Seats.seatArray[row][column].setStyle("-fx-background-color: lightgreen; -fx-text-fill: black;");
                 }
-                else if (integerArray[row][column] == 0){
+                else if (integerArray[row][column] == 0) {
                     Seats.seatArray[row][column].setSelected(false);
                     Seats.seatArray[row][column].setStyle("-fx-background-color: lightgray; -fx-text-fill: black;");
                 }
@@ -73,7 +73,15 @@ public class Seats {
 
                 seatsInRow.put(j, seat);
 
-                System.out.println(seatsInRow.get(3));
+                seat.setOnAction(actionEvent -> {
+                    if (seat.isSelected()) {
+                        seat.setStyle("-fx-background-color: lightgreen;");
+                        seat.setSelected(true);
+                    } else {
+                        seat.setStyle("-fx-background-color: lightgray;");
+                        seat.setSelected(false);
+                    }
+                });
             }
 
             // row housekeeping
