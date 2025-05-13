@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import theater.movies.components.menubar.MenuBar;
 import theater.movies.components.movie.Movie;
 import theater.movies.components.movie.MovieSerializer;
+import theater.movies.components.print.PrintScreen;
 import theater.movies.components.seats.Seats;
 
 import java.io.FileOutputStream;
@@ -44,6 +45,10 @@ public class HelloApplication extends Application {
 
         // set up the menu bar behind scenes
         HBox menuBar = MenuBar.createMenuBar(movies);
+
+        ComboBox<Movie> movie = menuBar.getChildren().get(0);
+
+
         seatRows.setStyle("-fx-background-color: #727272;");
 
         // Seats
@@ -68,7 +73,7 @@ public class HelloApplication extends Application {
         printButton.setOnAction(actionEvent -> {
             try {
                 System.out.println();
-                GridPane ticketRoot = new GridPane();
+                VBox ticketRoot = PrintScreen.getInfoPane();
                 Stage newStage = new Stage();
                 newStage.setTitle("Ticket for " + MenuBar.getMovie().getName());
                 newStage.setScene(new Scene(ticketRoot, 300, 300));
