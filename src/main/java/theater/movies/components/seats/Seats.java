@@ -5,8 +5,6 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import theater.movies.components.movie.Movie;
-
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,6 +47,8 @@ public class Seats {
             }
         }
     }
+
+
 
     //Functions
     //this function creates the seat UI element

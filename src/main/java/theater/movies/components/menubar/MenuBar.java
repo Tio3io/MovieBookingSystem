@@ -66,7 +66,7 @@ public class MenuBar {
                 timeSelector.getItems().clear();
 
                 // Set times starting from current time that a customer can choose from
-                int currentHours = LocalTime.now().getHour();
+                int currentHours = 7;
                 int currentMinutes = 0;
                 boolean currentTypeOfTime = LocalTime.now().isAfter(LocalTime.MIDNIGHT);
                 for (int i = 0; i < 10; i++) {

@@ -1,5 +1,4 @@
 package theater.movies.components.movie;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import theater.movies.components.seats.Seats;
 

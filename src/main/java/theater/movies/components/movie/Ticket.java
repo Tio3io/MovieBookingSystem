@@ -1,12 +1,21 @@
 package theater.movies.components.movie;
 
-public class Ticket {
+import java.io.Serializable;
+import java.util.ArrayList;
 
+
+public class Ticket implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private String theater;
     private String fullName;
     private String time;
     private String date;
     private String movie;
+    private ArrayList<String> seats;
+
+
+
 
 
     public String getTheater() {
@@ -41,6 +50,27 @@ public class Ticket {
         this.date = date;
     }
 
+
+
+    public void setSeats(ArrayList<String> seats) {
+        this.seats = seats;
+    }
+
+    public String getSeats() {
+        StringBuilder sb = new StringBuilder();
+        int count = 0;
+
+        for (String seat : this.seats) {
+            if (count == (this.seats.size() - 1)) {
+                sb.append(seat);
+            } else {
+                sb.append(seat).append(", ");
+            }
+            count++;
+        }
+
+        return sb.toString();
+    }
 
     public String getMovie() {
         return movie;
